@@ -15,10 +15,9 @@ function App() {
         data = Object.values(data)
         for (let i = 0; i < data.length; i++) {
           data[i].primary_attr = data[i].primary_attr === "str" ? "Strength" : data[i].primary_attr === "agi" ? "Agility" : data[i].primary_attr === "int" ? "Intelligence" : ""
-          data[i].level1_armor =Math.round(10*(data[i].base_armor + data[i].base_agi / 6))/10
-          data[i].level1_attack_damage=Math.round((data[i].base_attack_min + data[i].base_attack_max) / 2 + (data[i].primary_attr === "Strength" ? data[i].base_str : data[i].primary_attr === "Agility" ? data[i].base_agi : data[i].primary_attr === "Intelligence" ? data[i].base_int : 0))
+          data[i].level1_armor = Math.round(10 * (data[i].base_armor + data[i].base_agi / 6)) / 10
+          data[i].level1_attack_damage = Math.round((data[i].base_attack_min + data[i].base_attack_max) / 2 + (data[i].primary_attr === "Strength" ? data[i].base_str : data[i].primary_attr === "Agility" ? data[i].base_agi : data[i].primary_attr === "Intelligence" ? data[i].base_int : 0))
         }
-        console.log(data)
         setData(data)
 
       });
@@ -29,7 +28,7 @@ function App() {
       title: "Name",
       field: "localized_name",
       render: (rowData) => (<div>
-        <img src={`images/${rowData.localized_name.split(" ").join("-")}.png`} width="100px" height="auto" />
+        <img src={`images/${rowData.localized_name.split(" ").join("-").toLowerCase()}.png`} width="100px" height="auto" />
         <div>
           {rowData.localized_name}
         </div>
@@ -109,7 +108,7 @@ function App() {
     <div className="app">
       <Nav />
       <div className="content">
-      {data ? <MaterialTable icons={tableIcons} title="Heroes" data={data} columns={columns} options={options} /> : ""}
+        {data ? <MaterialTable icons={tableIcons} title="Heroes" data={data} columns={columns} options={options} /> : ""}
       </div>
     </div>
   );
